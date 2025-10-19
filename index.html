@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我们的恋爱时光</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            background: #fef9f7; /* 页面背景色 */
+            background-image: url("https://你的背景图链接"); /* 自定义：替换为背景图链接（可选） */
+            background-size: cover;
+            background-attachment: fixed;
+            font-family: "Microsoft YaHei", Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.85); /* 半透明白色背景 */
+            padding: 40px 60px;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        .title {
+            font-size: 28px;
+            color: #457b9d;
+            margin-bottom: 30px;
+            font-weight: normal;
+        }
+        .time-box {
+            font-size: 42px;
+            color: #e63946;
+            margin: 20px 0;
+            letter-spacing: 2px;
+        }
+        .album-btn {
+            display: inline-block;
+            margin-top: 40px;
+            text-decoration: none;
+            background: #457b9d;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-size: 18px;
+            transition: all 0.3s;
+        }
+        .album-btn:hover {
+            background: #1d3557;
+            transform: translateY(-2px);
+        }
+        .footer {
+            margin-top: 50px;
+            color: #666;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">我们已经在一起</h1>
+        <div class="time-box" id="loveTime"></div>
+        <!-- 相册跳转按钮 -->
+        <a href=" " class="album-btn">查看我们的点滴相册</a >
+    </div>
+    <div class="footer">
+        郭正轩LOVE王艺涵 这是我们的小网站
+    </div>
+
+    <script>
+        // 自定义：修改为你们正式在一起的时间（格式：年, 月-1, 日, 时, 分, 秒）
+        const loveStart = new Date(2025, 9, 8, 21, 00, 0); 
+        
+        // 实时更新时间差
+        function updateLoveTime() {
+            const now = new Date();
+            const timeDiff = now - loveStart; // 时间差（毫秒）
+            
+            // 计算天、时、分、秒
+            const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+            
+            // 补零（让数字显示为两位数，如 1→01）
+            const formatNum = (num) => num < 10 ? `0${num}` : num;
+            const showHours = formatNum(hours);
+            const showMinutes = formatNum(minutes);
+            const showSeconds = formatNum(seconds);
+            
+            // 显示到页面
+            document.getElementById('loveTime').innerText = 
+                `${days}天 ${showHours}时 ${showMinutes}分 ${showSeconds}秒`;
+        }
+        
+        // 初始执行+每秒更新
+        updateLoveTime();
+        setInterval(updateLoveTime, 1000);
+    </script>
+</body>
+</html>
